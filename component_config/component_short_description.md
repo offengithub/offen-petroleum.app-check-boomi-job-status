@@ -1,0 +1,1 @@
+Checks the status of a boomi job
