@@ -13,6 +13,7 @@ from keboola.component.exceptions import UserException
 from keboola.component.base import ComponentBase
 import json 
 import xmltodict
+from datetime import datetime, timezone, timedelta
 
 
 
@@ -27,11 +28,13 @@ KEY_END_TIME = 'end_time'
 
 # list of mandatory parameters => if some is missing,
 # component will fail with readable message on initialization.
-REQUIRED_PARAMETERS = [KEY_USERNAME,KEY_PASSWORD,KEY_PROCESS_ID,KEY_ATOM_ID, KEY_URL, KEY_START_TIME, KEY_END_TIME]
+REQUIRED_PARAMETERS = [KEY_USERNAME,KEY_PASSWORD,KEY_PROCESS_ID,KEY_ATOM_ID, KEY_URL]
 REQUIRED_IMAGE_PARS = []
 
 
-def query_execution_status(url,username, password, process_id, atom_id, start_time, end_time):
+current_time=datetime.now(timezone.utc)
+def query_execution_status(url,username, password, process_id, atom_id, start_time = (current_time - timedelta(days=1)).isoformat(), 
+                           end_time=current_time.isoformat()):
     """
     Queries the execution status of a Snowflake integration process in Boomi Atomsphere.
 
@@ -121,7 +124,7 @@ class Component(ComponentBase):
         end_time= self.configuration.parameters.get(KEY_END_TIME)
 
         
-        response=query_execution_status(url,username, password, process_id, atom_id,start_time, end_time)
+        response=query_execution_status(url,username, password, process_id, atom_id,start_time=(current_time - timedelta(days=1)).isoformat(), end_time=current_time.isoformat())
         if response:
             print(response)
         #self.write_manifest(out_table)
