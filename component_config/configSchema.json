@@ -1,19 +1,60 @@
 {
   "type": "object",
-  "title": "extractor configuration",
+  "title": "Extractor Configuration",
   "required": [
-    "print_hello"
+    "username",
+    "password",
+    "process_id",
+    "atom_id",
+    "url",
+    "start_time",
+    "end_time"
   ],
   "properties": {
-    "print_hello": {
-      "type": "boolean",
-      "title": "Print Hello",
+    "username": {
+      "type": "string",
+      "title": "Username",
+      "description": "The username required for authentication.",
       "propertyOrder": 1
     },
-    "debug": {
-      "type": "boolean",
-      "title": "Debug",
+    "password": {
+      "type": "string",
+      "format": "password",
+      "title": "Password",
+      "description": "The password required for authentication.",
       "propertyOrder": 2
+    },
+    "process_id": {
+      "type": "string",
+      "title": "Process ID",
+      "description": "Identifier for the process to be used.",
+      "propertyOrder": 4
+    },
+    "atom_id": {
+      "type": "string",
+      "title": "Atom ID",
+      "description": "Identifier for the atom involved in the process.",
+      "propertyOrder": 5
+    },
+    "url": {
+      "type": "string",
+      "title": "URL",
+      "description": "The endpoint URL for the extractor.",
+      "propertyOrder": 3
+    },
+    "start_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Start Time",
+      "description": "The start time for the process ISO 8601 format.",
+      "propertyOrder": 6
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "End Time",
+      "description": "The end time for the job process in ISO 8601 format.",
+      "propertyOrder": 7
     }
   }
 }
