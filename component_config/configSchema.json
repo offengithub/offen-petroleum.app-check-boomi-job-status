@@ -44,14 +44,14 @@
       "type": "string",
       "format": "date-time",
       "title": "Start Time",
-      "description": "The start time for the process in ISO 8601 format. Not required but defaults to yesterday datetime in UTC",
+      "description": " OPTIONAL: The start time for the process in ISO 8601 format. Not required but defaults to yesterday datetime in UTC",
       "propertyOrder": 6
     },
     "end_time": {
       "type": "string",
       "format": "date-time",
       "title": "End Time",
-      "description": "The end time for the job process in ISO 8601 format. Not required but defaults to current datetime in UTC",
+      "description": "OPTIONAL: The end time for the job process in ISO 8601 format. Not required but defaults to current datetime in UTC",
       "propertyOrder": 7
     }
   }

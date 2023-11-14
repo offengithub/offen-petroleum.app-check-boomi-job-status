@@ -33,8 +33,8 @@ REQUIRED_IMAGE_PARS = []
 
 
 current_time=datetime.now(timezone.utc)
-def query_execution_status(url,username, password, process_id, atom_id, start_time = (current_time - timedelta(days=1)).isoformat(), 
-                           end_time=current_time.isoformat()):
+def query_execution_status(url,username, password, process_id, atom_id, start_time , 
+                           end_time):
     """
     Queries the execution status of a Snowflake integration process in Boomi Atomsphere.
 
@@ -124,9 +124,19 @@ class Component(ComponentBase):
         end_time= self.configuration.parameters.get(KEY_END_TIME)
 
         
-        response=query_execution_status(url,username, password, process_id, atom_id,start_time=(current_time - timedelta(days=1)).isoformat(), end_time=current_time.isoformat())
-        if response:
-            print(response)
+        status_response=query_execution_status(url,username, password, process_id, atom_id,start_time=(current_time - timedelta(days=1)).isoformat(), end_time=current_time.isoformat())
+        if status_response:
+            # Extract the job status
+            response_dict = json.loads(status_response)
+
+            formatted_response = json.dumps(response_dict, indent=4)
+            print(formatted_response)
+         
+            #job_status = response_dict["bns:QueryResult"]["bns:result"]["bns:status"]
+            #job_name = response_dict["bns:QueryResult"]["bns:result"]["bns:processName"]
+            #job_run_time=response_dict["bns:QueryResult"]["bns:result"]["bns:executionDuration"]
+            #print(f"job: {job_name} is {job_status}. Runtime:{float(job_run_time)/1000/60} minutes")
+
         #self.write_manifest(out_table)
 
 """
